@@ -13,19 +13,26 @@
 <body>
 
   <div class="container">
+    <!-- Beginning header -->
     <header>
-      <nav>
+      <nav class="page-title">
         <h1><a href="/">Restaurant Reviews</a></h1>
       </nav>
     </header>
+    <!-- End header -->
 
+    <!-- Beginning main -->
     <main id="maincontent">
+      <!-- Beginning google map section -->
       <section id="map-container">
-        <div id="map"></div>
+        <div id="map" class="maps"></div>
       </section>
+      <!-- End google map section -->
+
+      <!-- Beginnning restaurant section -->
       <section>
         <div class="filter-options">
-          <h2>Filter Results</h2>
+          <!-- <h2>Filter Results</h2> --> <!-- Filter results is redundant and unnecessary -->
           <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
             <option value="all">All Neighborhoods</option>
           </select>
@@ -35,7 +42,9 @@
         </div>
         <ul id="restaurants-list"></ul>
       </section>
+      <!-- End restaurant section -->
     </main>
+    <!-- End main -->
 
     <footer id="footer">
       Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
