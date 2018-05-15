@@ -96,6 +96,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
+  title.className = 'review-title';
   title.innerHTML = 'Reviews';
   container.appendChild(title);
 
@@ -115,23 +116,52 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 /**
  * Create review HTML and add it to the webpage.
  */
+
+ // Use createReviewHTML to create classes so review card has margin
+ // name-space, date-space, rating-space, content-space that can be
+ // edited with css.
 createReviewHTML = (review) => {
   const li = document.createElement('li');
-  const name = document.createElement('p');
+  li.className = 'review-container';
+
+  // Create div with the class review-info to contain
+  // data space for restaurant name and date
+  const reviewInfo = document.createElement('div');
+  reviewInfo.className = 'review-info';
+
+  // Create Restaurant Name info.
+  // Use h2 for easier accessibility
+  const name = document.createElement('h2');
+  name.className = 'review-title';
   name.innerHTML = review.name;
-  li.appendChild(name);
+  reviewInfo.appendChild(name);
 
-  const date = document.createElement('p');
+  // Create Review Date
+  // Use h3 for better accessibility
+  const date = document.createElement('h3');
+  date.className = 'review-date';
   date.innerHTML = review.date;
-  li.appendChild(date);
+  reviewInfo.appendChild(date);
+  li.appendChild(reviewInfo);
 
+  // Create review rating with a div to also contain
+  // the review text from the user
+  const containerActions = document.createElement('div');
+  containerActions.className = 'review-container-rating';
   const rating = document.createElement('p');
+  rating.className = 'review-rating'
   rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
+  containerActions.append(rating);
+  li.appendChild(containerActions);
 
+  // Create review comments
+  const reviewTextContainer = document.createElement('div');
+  reviewTextContainer.className = 'review-text-container';
   const comments = document.createElement('p');
+  comments.className = 'review-text';
   comments.innerHTML = review.comments;
-  li.appendChild(comments);
+  reviewTextContainer.appendChild(comments);
+  li.appendChild(reviewTextContainer);
 
   return li;
 }
