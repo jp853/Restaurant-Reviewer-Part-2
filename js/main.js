@@ -81,7 +81,16 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
+
+  // set frames to have a filled title attribute
+  // https://developers.google.com/maps/documentation/javascript/events
+  let fillTitle = () => {
+    const iFrameGoogleMaps = document.querySelector('#map iframe');
+    iFrameGoogleMaps.setAttribute('title', 'Google Maps view of restaurants in New York City');
+  }
+  self.map.addListener('tilesloaded', fillTitle);
 }
+
 
 /**
  * Update page and map for current restaurants.
@@ -142,6 +151,9 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+
+  // set alternative text here for better scalability
+  image.setAttribute('alt', restaurant.alternative_text);
   li.append(image);
 
   // Create divs for easier restaurant info styling

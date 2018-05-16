@@ -16,6 +16,14 @@ window.initMap = () => {
       });
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+
+      // set frames to have a filled title attribute
+      // https://developers.google.com/maps/documentation/javascript/events
+      let fillTitle = () => {
+        const iFrameGoogleMaps = document.querySelector('#map iframe');
+        iFrameGoogleMaps.setAttribute('title', 'Google Maps view of restaurants in New York City');
+      }
+      self.map.addListener('tilesloaded', fillTitle);
     }
   });
 }
@@ -51,6 +59,8 @@ fetchRestaurantFromURL = (callback) => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
+  // insert tabIndex for a11y
+  name.tabIndex = '0';
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
@@ -58,6 +68,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+
+  // Alternative text for scalability
+  image.alt = restaurant.alternative_text;
+  image.tabIndex = '0';
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -77,6 +91,10 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
   const hours = document.getElementById('restaurant-hours');
   for (let key in operatingHours) {
     const row = document.createElement('tr');
+    // give row className for quicker styling
+    // insert tabIndex
+    row.className = 'restaurant-info-hours-content';
+    row.tabIndex = '0';
 
     const day = document.createElement('td');
     day.innerHTML = key;
@@ -175,6 +193,9 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
   const li = document.createElement('li');
   li.className = 'breadcrumb';
   li.innerHTML = restaurant.name;
+  // insert 'current page' for a11y
+  // www.w3.org/TR/wai-aria-practices/examples/breadcrumb/index.html
+  li.setAttribute('aria-current', 'page');
   breadcrumb.appendChild(li);
 }
 
