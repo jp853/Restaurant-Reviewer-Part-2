@@ -441,8 +441,8 @@ img, embed, object, video {
 
 /* ------------------- Breakpoints -------------------- */
 
-/*0 - 479, approx 30rem*/
-@media screen and (max-width: 30rem) {
+/*0 - 480, approx 30rem*/
+@media screen and (max-width: 29.94rem) {
   .container {
     max-width: 30rem;
   }
@@ -460,19 +460,67 @@ img, embed, object, video {
   .restaurant-info {
     flex-direction: column;
   }
+  .restaurant-info-container {
+    width: 100%;
+    order: 2;
+  }
   .restaurant-info-map {
     width: 100%;
     height: 30vh;
     order: 1;
   }
-  .restaurant-info-container {
-    width: 100%;
-    order: 2;
-  }
   .footer-content {
     font-size: 0.55rem;
     font-weight: 300;
     letter-spacing: 0.075em;
+  }
+}
+
+/*481 - 600 px break point, approx 37.5rem*/
+
+@media screen and (min-width: 30rem) and (max-width: 37.44rem) {
+  .container {
+    max-width: 37.44rem;
+  }
+  .filter-options select {
+    width: calc(50% - 1em);
+  }
+  .restaurant-container {
+    margin: 1rem;
+  }
+  .restaurant-info {
+    flex-direction: column;
+  }
+  .restaurant-info-container {
+    width: 100%;
+    order: 2;
+  }
+  .restaurant-info-map {
+    width: 100%;
+    height: 35vh;
+    order: 1;
+  }
+  .footer-content {
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.075em;
+  }
+}
+
+/*601 - 840px breakpoint, approx 52.5rem*/
+
+@media screen and (min-width: 37.5rem) and (max-width: 52.44rem) {
+  .container {
+    max-width: 52.44rem;
+  }
+  .filter-options select {
+    width: calc(45% - 1em);
+  }
+  .restaurant-container {
+    width: 45%; /*will display 2 restaurant containers*/
+  }
+  .review-container {
+    width: 45%; /*will display 2 review containers*/
   }
 }
 
