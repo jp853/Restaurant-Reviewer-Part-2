@@ -541,6 +541,23 @@ img, embed, object, video {
   }
 }
 
+/*961 - 1280px breakpoint, approx 80rem*/
+
+@media screen and (min-width: 60rem) and (max-width: 79.94rem) {
+  .container {
+    max-width: 79.94rem;
+  }
+  .option-filters select {
+    width: calc(35% - 1em);
+  }
+  .restaurant-container {
+    width: 30% /*will display 3 restaurant containers*/
+  }
+  .review-container {
+    width: 30% /*will display 3 review containers*/
+  }
+}
+
 
 
 
