@@ -164,7 +164,7 @@ img, embed, object, video {
 .restuarant-info-map {
   width: 100%;
   height: 25vh;
-  flex: 1;
+  order: 1;
 }
 
 .map-stretch {
@@ -521,6 +521,23 @@ img, embed, object, video {
   }
   .review-container {
     width: 45%; /*will display 2 review containers*/
+  }
+}
+
+/*841 - 960px breakpoint, approx 60rem*/
+
+@media screen and (min-width: 52.5rem) and (max-width: 59.94rem) {
+  .container {
+    max-width: 59.94rem;
+  }
+  .option-filters select {
+    width: calc(40% - 1em);
+  }
+  .restaurant-container {
+    width: 45%; /*will display 2 restaurant containers*/
+  }
+  .review-container {
+    width: 45%; /*will display 2 restaurant containers*/
   }
 }
 
