@@ -124,25 +124,26 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   li.className = 'review-container';
 
-  // Create div with the class review-info to contain
-  // data space for restaurant name and date
-  const reviewInfo = document.createElement('div');
-  reviewInfo.className = 'review-info';
+  // Create div with primary information to contain the following -
+  // restaurant name (title), date (subtitle).
+  // title and subtitle will contain constistent styling with restaurantHTML
+  const containerPrimary = document.createElement('div');
+  containerPrimary.className = 'container-primary';
 
   // Create Restaurant Name info.
   // Use h2 for easier accessibility
   const name = document.createElement('h2');
-  name.className = 'review-title';
+  name.className = 'container-primary-title';
   name.innerHTML = review.name;
-  reviewInfo.appendChild(name);
+  containerPrimary.appendChild(name);
 
   // Create Review Date
   // Use h3 for better accessibility
   const date = document.createElement('h3');
-  date.className = 'review-date';
+  date.className = 'container-primary-subtitle';
   date.innerHTML = review.date;
-  reviewInfo.appendChild(date);
-  li.appendChild(reviewInfo);
+  containerPrimary.appendChild(date);
+  li.appendChild(containerPrimary);
 
   // Create review rating with a div to also contain
   // the review text from the user
@@ -155,13 +156,13 @@ createReviewHTML = (review) => {
   li.appendChild(containerActions);
 
   // Create review comments
-  const reviewTextContainer = document.createElement('div');
-  reviewTextContainer.className = 'review-text-container';
+  const containerSecondary = document.createElement('div');
+  containerSecondary.className = 'container-secondary';
   const comments = document.createElement('p');
-  comments.className = 'review-text';
+  comments.className = 'container-secondary-content';
   comments.innerHTML = review.comments;
-  reviewTextContainer.appendChild(comments);
-  li.appendChild(reviewTextContainer);
+  containerSecondary.appendChild(comments);
+  li.appendChild(containerSecondary);
 
   return li;
 }
@@ -172,6 +173,7 @@ createReviewHTML = (review) => {
 fillBreadcrumb = (restaurant=self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
+  li.className = 'breadcrumb';
   li.innerHTML = restaurant.name;
   breadcrumb.appendChild(li);
 }
