@@ -70,7 +70,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
   // Alternative text for scalability
-  image.alt = restaurant.alternative_text;
+  image.alt = restaurant.alt_text;
   image.tabIndex = '0';
 
   const cuisine = document.getElementById('restaurant-cuisine');

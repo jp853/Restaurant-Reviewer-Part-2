@@ -153,7 +153,7 @@ createRestaurantHTML = (restaurant) => {
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
   // set alternative text here for better scalability
-  image.setAttribute('alt', restaurant.alternative_text);
+  image.setAttribute('alt', restaurant.alt_text);
   li.append(image);
 
   // Create divs for easier restaurant info styling
