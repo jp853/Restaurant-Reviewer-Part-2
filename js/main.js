@@ -137,28 +137,57 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  */
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
+  li.className = 'restaurant-container';
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   li.append(image);
 
-  const name = document.createElement('h1');
+  // Create divs for easier restaurant info styling
+
+  // Div for primary content to include the following -
+  // name (title), neighborhood (subtitle)
+  const containerPrimary = document.createElement('div');
+  containerPrimary.className = 'container-primary';
+
+  //Create name (title) for primary information
+  //change to h2 for better accessibility
+  const name = document.createElement('h2');
+  name.className = 'container-primary-title';
   name.innerHTML = restaurant.name;
-  li.append(name);
+  containerPrimary.append(name);
 
-  const neighborhood = document.createElement('p');
+  // Create neighborhood for primary information
+  // use h3 for subtitle and beter accessibility
+  const neighborhood = document.createElement('h3');
+  neighborhood.className = 'cotainer-primary-subtitle';
   neighborhood.innerHTML = restaurant.neighborhood;
-  li.append(neighborhood);
+  containerPrimary.append(neighborhood);
+  li.append(containerPrimary);
 
-  const address = document.createElement('p');
+  // Create div for secondary content to include address
+  const containerSecondary = document.createElement('div');
+  containerSecondary.className = 'container-secondary';
+  // There is an address element to use instead of p
+  const address = document.createElement('address');
+  // use content in class name so the css can be used
+  // for secondary content in review containers
+  address.className = 'container-secondary-content';
   address.innerHTML = restaurant.address;
-  li.append(address);
+  containerSecondary.append(address);
+  li.append(containerSecondary);
 
+  //Create div for actions for so user can click a link
+  //for more details
+  const containerActions = document.createElement('div');
+  containerActions.className = 'container-button';
   const more = document.createElement('a');
+  more.className = 'container-button-link';
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  containerActions.append(more);
+  li.append(containerActions);
 
   return li
 }
