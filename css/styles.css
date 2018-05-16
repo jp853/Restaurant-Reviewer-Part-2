@@ -543,21 +543,36 @@ img, embed, object, video {
 
 /*961 - 1280px breakpoint, approx 80rem*/
 
-@media screen and (min-width: 60rem) and (max-width: 79.94rem) {
+@media screen and (min-width: 60rem) and (max-width: 78.93rem) {
   .container {
-    max-width: 79.94rem;
+    max-width: 78.93rem;
   }
   .option-filters select {
     width: calc(35% - 1em);
   }
   .restaurant-container {
-    width: 30% /*will display 3 restaurant containers*/
+    width: 30%; /*will display 3 restaurant containers*/
   }
   .review-container {
-    width: 30% /*will display 3 review containers*/
+    width: 30%; /*will display 3 review containers*/
   }
 }
 
+/*1281 + pixels, 80+rem*/
+@media screen and (min-width: 78.95rem) {
+  .filter-options select {
+    width: calc(30% - 1em);
+  }
+  .restaurant-container {
+    width: 22.5%; /*will display 4 restaurant containers*/
+  }
+  .review-container {
+    width: 30%; /*will display 3 review containers*/
+  }
+  .restaurant-info-hours-content {
+    font-size: 0.925rem;
+  }
+}
 
 
 
