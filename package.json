@@ -1,0 +1,19 @@
+{
+  "name": "mws-restaurant-stage-1",
+  "version": "1.0.0",
+  "description": "Stage 1 of a 3 stage process to build a seamless functioning offline first application for a restaurant reviewing website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/udacity/mws-restaurant-stage-1.git"
+  },
+  "author": "Justin Pingatore",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/udacity/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/udacity/mws-restaurant-stage-1#readme"
+}

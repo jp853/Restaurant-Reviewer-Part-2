@@ -23,10 +23,10 @@
     <!-- End header -->
 
     <!-- Beginning main -->
-    <main id="maincontent">
+    <main id="maincontent" role="main">
       <!-- Beginning google map section -->
       <section id="map-container">
-        <div id="map" class="maps"></div>
+        <div id="map" class="maps" role="application" aria-label="Google Maps view of restaurants in New York City" aria-hidden="true"></div>
       </section>
       <!-- End google map section -->
 
@@ -34,10 +34,10 @@
       <section>
         <div class="filter-options">
           <!-- <h2>Filter Results</h2> --> <!-- Filter results is redundant and unnecessary -->
-          <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+          <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" aria-label="Select Neighborhood">
             <option value="all">All Neighborhoods</option>
           </select>
-          <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+          <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" aria-label="Select Cuisine">
             <option value="all">All Cuisines</option>
           </select>
         </div>
@@ -57,6 +57,16 @@
   </div>
 
 <!-- Beginning Scripts -->
+<!-- Service Worker -->
+<script>
+  // Check that service workers are registered
+  if ('serviceWorker' in navigator) {
+    // Use the window load event to keep the page load performant
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
+</script>
 <!-- Database Helpers -->
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
 <!--  Main Javascript File -->
