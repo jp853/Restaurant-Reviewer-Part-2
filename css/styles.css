@@ -293,6 +293,13 @@ img, embed, object, video {
   padding: 1rem;
 }
 
+#restaurant-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+}
+
 .restaurant-info-container {
   display: flex;
   flex-direction: column;
@@ -516,6 +523,11 @@ img, embed, object, video {
   .filter-options select {
     width: calc(45% - 1em);
   }
+  .restaurant-info-map {
+    width: 100%;
+    height: 35vh;
+    order: 1;
+  }
   .restaurant-container {
     width: 45%; /*will display 2 restaurant containers*/
   }
@@ -532,6 +544,11 @@ img, embed, object, video {
   }
   .option-filters select {
     width: calc(40% - 1em);
+  }
+  .restaurant-info-map {
+    width: 100%;
+    height: 35vh;
+    order: 1;
   }
   .restaurant-container {
     width: 45%; /*will display 2 restaurant containers*/
@@ -550,6 +567,11 @@ img, embed, object, video {
   .option-filters select {
     width: calc(35% - 1em);
   }
+  .restaurant-info-map {
+    width: 100%;
+    height: 35vh;
+    order: 1;
+  }
   .restaurant-container {
     width: 30%; /*will display 3 restaurant containers*/
   }
@@ -562,6 +584,11 @@ img, embed, object, video {
 @media screen and (min-width: 78.95rem) {
   .filter-options select {
     width: calc(30% - 1em);
+  }
+  .restaurant-info-map {
+    width: 100%;
+    height: 35vh;
+    order: 1;
   }
   .restaurant-container {
     width: 22.5%; /*will display 4 restaurant containers*/
