@@ -21,6 +21,7 @@ body {
   background-color: #fafafa;
   margin: 0;
   font-size: 16px;
+  max-width: 80rem;
 }
 
 ul {
