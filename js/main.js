@@ -71,6 +71,7 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
  * Initialize Google map, called from HTML.
  */
 window.initMap = () => {
+  console.log("Window InitMap Hit")
   let loc = {
     lat: 40.722216,
     lng: -73.987501
@@ -110,6 +111,7 @@ updateRestaurants = () => {
       console.error(error);
     } else {
       resetRestaurants(restaurants);
+      console.log("Reached1")
       fillRestaurantsHTML();
     }
   })
@@ -145,16 +147,23 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
+  console.log("hit")
   const li = document.createElement('li');
   li.className = 'restaurant-container';
 
+  // Create image
+  // Make image clickable for easier user experience
+  const href = document.createElement('a')
+  href.href = DBHelper.urlForRestaurant(restaurant)
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
   // set alternative text here for better scalability
   image.setAttribute('alt', restaurant.alt_text);
-  li.append(image);
+  href.append(image);
+  li.append(href);
+  console.log(href)
 
   // Create divs for easier restaurant info styling
 
