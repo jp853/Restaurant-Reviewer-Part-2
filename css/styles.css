@@ -46,9 +46,9 @@ img, embed, object, video {
 }
 
 
-/* -------------------- Navigation -------------------- */
+/* -------------------- Header -------------------- */
 
-.navbar {
+.header {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -60,7 +60,7 @@ img, embed, object, video {
   text-transform: uppercase;
 }
 
-.navbar-content {
+.header-content {
   font-size: 1.25rem;
   font-weight: 300;
   letter-spacing: 0.25em;
@@ -68,7 +68,7 @@ img, embed, object, video {
   color: #ffffff;
 }
 
-.navbar-content:hover, .navbar-content:focus {
+.header-content:hover, .header-content:focus {
   font-weight: 400;
   letter-spacing: 0.275;
 }
