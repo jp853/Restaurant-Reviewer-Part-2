@@ -186,8 +186,8 @@ img, embed, object, video {
   height: 1.75rem;
   font-size: 1rem;
   width: calc(50% - 1em);
-  border: none;
-  outline: none;
+  /*border: none;*/
+  /*outline: none;*/
   background-color: rgb(255, 255, 255);
 }
 
@@ -499,6 +499,9 @@ img, embed, object, video {
   .restaurant-info {
     flex-direction: column;
   }
+  .restaurant-img {
+    width: 30rem;
+  }
   .restaurant-info-container {
     width: 100%;
     order: 2;
@@ -520,6 +523,9 @@ img, embed, object, video {
 @media screen and (min-width: 37.5rem) and (max-width: 52.44rem) {
   .container {
     max-width: 52.44rem;
+  }
+  .restaurant-img {
+    width: 40rem;
   }
   .filter-options select {
     width: calc(45% - 1em);
@@ -543,6 +549,9 @@ img, embed, object, video {
   .container {
     max-width: 59.94rem;
   }
+  .restaurant-img {
+    width: 45rem;
+  }
   .option-filters select {
     width: calc(40% - 1em);
   }
@@ -564,6 +573,9 @@ img, embed, object, video {
 @media screen and (min-width: 60rem) and (max-width: 78.93rem) {
   .container {
     max-width: 78.93rem;
+  }
+  .restaurant-img {
+    width: 50rem;
   }
   .option-filters select {
     width: calc(35% - 1em);
