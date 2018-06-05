@@ -1,19 +1,37 @@
 {
-  "name": "mws-restaurant-stage-1",
-  "version": "1.0.0",
-  "description": "Stage 1 of a 3 stage process to build a seamless functioning offline first application for a restaurant reviewing website.",
+  "name": "mws-restaurant-stage-2",
+  "version": "1.1.0",
+  "description": "Stage 2 of a 3 stage process to build a seamless functioning offline first application for a restaurant reviewing website.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/udacity/mws-restaurant-stage-1.git"
+    "url": "https://github.com/jp853/Restaurant-Reviewer-Part-2"
   },
   "author": "Justin Pingatore",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/udacity/mws-restaurant-stage-1/issues"
+    "url": "https://github.com/jp853/Restaurant-Reviewer-Part-2"
   },
-  "homepage": "https://github.com/udacity/mws-restaurant-stage-1#readme"
+  "homepage": "https://github.com/jp853/Restaurant-Reviewer-Part-2",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "browserify": "^16.2.2",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-clean-css": "^3.9.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-responsive": "^2.10.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-webp": "^3.0.0",
+    "imagemin": "^5.3.1",
+    "imagemin-webp": "^4.1.0",
+    "run-sequence": "^2.2.1",
+    "workbox-build": "^3.2.0"
+  }
 }
