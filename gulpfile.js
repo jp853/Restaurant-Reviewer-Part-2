@@ -1,37 +1,35 @@
-/*jshint esversion: 6 */
+// https://developers.google.com/web/tools/workbox/guides/precache-files/workbox-build
 const gulp = require('gulp');
-const workboxBuilder = require('workbox-build');
+const workboxBuild = require('workbox-build');
 
-// Copy files from app to build
-gulp.task('copy', () =>
-  gulp.src([
-    'app/**/*',
-  ]).pipe(gulp.dest('build'))
-);
+// Copy the files from app to build
+gulp.task('copy', () => gulp.src(['app/**/*']).pipe(gulp.dest('build')));
 
-// service worker
+// Service-Worker
 gulp.task('service-worker', () => {
-  return workboxBuilder.injectManifest({
+  return workboxBuild.injectManifest({
     swSrc: 'app/sw.js',
     swDest: 'build/sw.js',
     globDirectory: 'build',
     globPatterns: [
-      '**/*.{html,css,js}',
+      '**\/*.{js,css,html,png}',
       'manifest.json',
-      'img/touch/*.png'
+      'img/icon/*.png'
     ],
-    globIgnore: [
+    globIgnores: [
       'sw-src.js',
       'workbox-config.js',
       'node_modules/**/*'
     ]
-  }).catch(err => {
-    console.log(`[ERROR] ` + err);
-  });
+  }).then(({count, size, warnings}) => {
+    // Optionally, log any warnings and details.
+    warnings.forEach(console.warn);
+    console.log(`${count} files will be precached, totaling ${size} bytes.`);
+  }).catch(err => console.log(` [ERROR] `+ err));
 });
 
-// default task
+// Set default
 gulp.task('default', ['copy', 'service-worker']);
 
-// watch task
+// Set watch task to update files in the 'app' folder
 gulp.task('watch', () => gulp.watch('app/**/*', ['copy', 'service-worker']));
