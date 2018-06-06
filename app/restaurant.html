@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="utf-8">
+  <meta name="Description" content="The best restaurant reviews in the area.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Normalize.css for better cross-browser consistency -->
+  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+  <!-- Main CSS file -->
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <title>Restaurant Info</title>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Beginning header -->
+    <header>
+      <!-- Beginning nav -->
+      <div class="header">
+        <h1>
+          <a class="header-content" href="/">Restaurant Reviews</a>
+        </h1>
+      </div>
+
+      <!-- Beginning breadcrumb -->
+      <nav aria-label="Breadcrumb">
+        <ol id="breadcrumb" class="breadcrumbs">
+          <li class="breadcrumb">
+            <a class="breadcrumb-link" href="/">Home</a>
+          </li>
+        </ol>
+      </nav>
+      <!-- End breadcrumb -->
+      <!-- End nav -->
+    </header>
+    <!-- End header -->
+
+    <!-- Beginning main -->
+    <main id="maincontent" role="main">
+
+      <!-- restaurant info -->
+      <div class="restaurant-info">
+
+        <!-- Beginning restaurant -->
+        <section id="restaurant-container" class="restuarant-info-container">
+          <img id="restaurant-img">
+          <div class="container-primary">
+            <h2 id="restaurant-name" class="container-primary-title"></h2>
+            <address id="restaurant-address" class="container-secondary-content"></address>
+          </div>
+
+          <div class="restaurant-info-category">
+            <p id="restaurant-cuisine" class="restaurant-info-category-content"></p>
+          </div>
+
+          <div class="restaurant-info-hours">
+            <table id="restaurant-hours" class="restaurant-info-hours-content"></table>
+          </div>
+
+        </section>
+        <!-- end restaurant -->
+
+      </div>
+
+      <!-- Beginning map -->
+      <section id="map-container" class="restaurant-info-map">
+        <div id="map" class="map-stretch" role="application" aria-label="Google Maps view of restaurants in New York City" aria-hidden="true"></div>
+      </section>
+      <!-- End map -->
+
+      <!-- Beginning reviews -->
+      <section id="reviews-container">
+        <ul id="reviews-list" class="review-containers"></ul>
+      </section>
+      <!-- End reviews -->
+
+    </main>
+    <!-- End main -->
+
+    <!-- Beginning footer -->
+    <footer id="footer" class="footer">
+      <p class="footer-content">
+        Copyright (c) 2017 <a class="footer-link" href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
+      </p>
+    </footer>
+    <!-- End footer -->
+  </div>
+
+
+  <!-- Beginning scripts -->
+  <!-- Database helpers -->
+  <script type="text/javascript" src="js/dbhelper.js"></script>
+  <!-- Main javascript file -->
+  <script type="text/javascript" src="js/restaurant_info.js"></script>
+  <!-- Google Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZyY6rTKCMnfhWodRhjSXJn0LUQtjLjY0&libraries=places&callback=initMap"></script>
+  <!-- End scripts -->
+
+</body>
+
+</html>

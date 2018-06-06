@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head lang = "en">
+  <meta charset="utf-8">
+  <meta name="Description" content="The best restaurant reviews in the area.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Restaurant Reviews</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Beginning header -->
+    <header>
+      <nav class="header">
+        <h1>
+          <a class="header-content" href="/">Restaurant Reviews</a>
+        </h1>
+      </nav>
+    </header>
+    <!-- End header -->
+
+    <!-- Beginning main -->
+    <main id="maincontent" role="main">
+      <!-- Beginning google map section -->
+      <section id="map-container">
+        <div id="map" class="maps" role="application" aria-label="Google Maps view of restaurants in New York City" aria-hidden="true"></div>
+      </section>
+      <!-- End google map section -->
+
+      <!-- Beginnning restaurant section -->
+      <section>
+        <div class="filter-options">
+          <!-- <h2>Filter Results</h2> --> <!-- Filter results is redundant and unnecessary -->
+          <select autofocus id="neighborhoods-select" name="neighborhoods" onchange="refreshRestaurants()" aria-label="Select Neighborhood">
+            <option value="all">All Neighborhoods</option>
+          </select>
+          <select autofocus id="cuisines-select" name="cuisines" onchange="refreshRestaurants()" aria-label="Select Cuisine">
+            <option value="all">All Cuisines</option>
+          </select>
+        </div>
+        <ul id="restaurants-list" class="restaurant-containers"></ul>
+      </section>
+      <!-- End restaurant section -->
+    </main>
+    <!-- End main -->
+
+    <footer id="footer" class="footer">
+      <p class="footer-content">
+        Copyright (c) 2017
+        <a class="footer-link" href="/"><strong>Restaurant Reviews</strong></a>
+        All Rights Reserved.
+      </p>
+    </footer>
+  </div>
+
+<!-- Beginning Scripts -->
+
+<!-- Service Worker -->
+  <script>
+    // Check that service workers are registered
+    if ('serviceWorker' in navigator) {
+      // Use the window load event to keep the page load performant
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
+<!-- Database Helpers -->
+  <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
+<!--  Main Javascript File -->
+  <script type="application/javascript" charset="utf-8" src="js/app.js"></script>
+<!-- Google Maps API -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZyY6rTKCMnfhWodRhjSXJn0LUQtjLjY0&libraries=places&callback=initMap"></script>
+<!--   Ending Scripts -->
+
+</body>
+
+</html>

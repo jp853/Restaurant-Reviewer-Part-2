@@ -1,0 +1,21 @@
+{
+  "short_name": "RestReview",
+  "name": "MWS-Restaurant-Reviewer",
+  "description": "Udacity Mobile Web Specialist ND Restaurant Reviewer App",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "img/icon/icon_small.png",
+      "type": "image/png",
+      "sizes":"192x192"
+    },
+    {
+      "src": "img/icon/icon_med.png",
+      "type": "image/png",
+      "sizes":"512x512"
+    }
+  ],
+  "theme_color": "#002984",
+  "background_color": "#fafafa"
+}
