@@ -18,11 +18,14 @@ if (workbox) {
   // https://developers.google.com/web/tools/workbox/modules/workbox-strategies#stale-while-revalidate
   // Google
   workbox.routing.registerRoute(
-    new RegExp('(.*).(?:googleapis|gstatic).com/(.*)'),
+    new RegExp('https://maps.(?:googleapis|gstatic).com/(.*)'),
     workbox.strategies.staleWhileRevalidate({
-      cacheName: 'googleapis-cache',
+      cacheName: 'maps-cache',
       cacheableResponse: {
         statuses: [0, 200]
+      },
+      cacheExpiration: {
+        maxEntries: 30
       }
     })
   );
