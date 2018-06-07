@@ -1,16 +1,16 @@
 /*jshint esversion: 6 */
 
 // Declare variable and id elements (restructored)
-let restaurants,
-    neighborhoods,
-    cuisines,
-    map;
+let restaurants;
+let neighborhoods;
+let cuisines;
+let map;
 let markers = [];
 
-const googleMap = document.getElementById('map');
-const neighborhoodsSelect = document.getElementById('neighborhoods-select');
-const cuisinesSelect = document.getElementById('cuisines-select');
-const restaurantsList = document.getElementById('restaurants-list');
+const elementGoogleMap = document.getElementById('map');
+const elementNeighborhoodsSelect = document.getElementById('neighborhoods-select');
+const elementCuisinesSelect = document.getElementById('cuisines-select');
+const elementRestaurantsList = document.getElementById('restaurants-list');
 
 
 /**
@@ -24,51 +24,45 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 /**
  * Fetch all neighborhoods and UPDDATE their HTML.
+ * Error handling will be don in DBHelper.fetchNeighborhoods
  */
-fetchNeighborhoods = () => {
-  DBHelper.fetchNeighborhoods((error, neighborhoods) => {
-    if (error) { // Got an error
-      console.error(error);
-    } else {
-      self.neighborhoods = neighborhoods;
-      updateNeighborhoodsUI();
-    }
-  });
+const fetchNeighborhoods = () => {
+  DBHelper.fetchNeighborhoods()
+  .then(neighborhoods => {
+    self.neighborhoods = neighborhoods;
+    updateNeighborhoodsUI;
+  })
 }
 
 /**
- * Update and Set neighborhoods HTML.
+ * Update neighborhood select
  */
-updateNeighborhoodsUI = (neighborhoods = self.neighborhoods) => {
+const updateNeighborhoodsUI = (neighborhoods = self.neighborhoods) => {
   // const select = document.getElementById('neighborhoods-select');
   neighborhoods.forEach(neighborhood => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
     option.value = neighborhood;
     // select.append(option);
-    neighborhoodsSelect.appendChild(option);
+    elementNeighborhoodsSelect.appendChild(option);
   });
-}
+};
 
-/**
- * Fetch all cuisines and UPDATE their HTML.
- */
-fetchCuisines = () => {
-  DBHelper.fetchCuisines((error, cuisines) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      self.cuisines = cuisines;
-      // fillCuisinesHTML();
-      updateCuisinesUI();
-    }
+// Fetch and update all cuisines
+// Error handling in DBHelper.fetchNeighborhoods
+
+const fetchCuisines = () => {
+  DBHelper.fetchCuisines()
+  .then(cuisines => {
+    self.cuisines = cuisines;
+    updateCuisinesUI();
   });
-}
+};
 
-/**
- * Update cuisines HTML.
- */
-updateCuisinesUI = (cuisines = self.cuisines) => {
+
+ // Update cuisines select object
+
+const updateCuisinesUI = (cuisines = self.cuisines) => {
   // const select = document.getElementById('cuisines-select');
 
   cuisines.forEach(cuisine => {
@@ -76,34 +70,32 @@ updateCuisinesUI = (cuisines = self.cuisines) => {
     option.innerHTML = cuisine;
     option.value = cuisine;
     // select.append(option);
-    cuisinesSelect.appendChild(option);
+    elementCuisinesSelect.appendChild(option);
   });
-}
+};
 
 // Update ul restaurants-list and markers on map for current restaurants.
-refreshRestaurants = () => {
-  const neighborhoodIndex = neighborhoodsSelect.selectedIndex;
-  const cuisineIndex = cuisinesSelect.selectedIndex;
-  const neighborhood = neighborhoodsSelect[neighborhoodIndex].value;
-  const cuisine = cuisinesSelect[cuisineIndex].value;
+const refreshRestaurants = () => {
+  const neighborhoodIndex = elementNeighborhoodsSelect.selectedIndex;
+  const cuisineIndex = elementCuisinesSelect.selectedIndex;
+  const neighborhood = elementNeighborhoodsSelect[neighborhoodIndex].value;
+  const cuisine = elementCuisinesSelect[cuisineIndex].value;
 
-  DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      resetRestaurantsUI(restaurants);
-      // console.log("Reached1")
-      updateRestaurantsUI();
-    }
+  DBHelper.fetchRestaurantByCuisineAndNeighborhood(neighborhood, cuisine)
+  .then(restaurants => {
+    resetRestaurantsUI(restaurants);
+    updateRestaurantsUI();
   });
-}
+};
 
 /**
  * Clear current restaurants, their HTML and remove their map markers.
  */
-resetRestaurantsUI = (restaurants) => {
+const resetRestaurantsUI = (restaurants) => {
   // Remove all restaurants
   self.restaurants = [];
+  // Set inner html
+  elementRestaurantsList.innerHTML = '';
   // const ul = document.getElementById('restaurants-list');
   // ul.innerHTML = '';
 
@@ -111,40 +103,56 @@ resetRestaurantsUI = (restaurants) => {
   markers.forEach(m => m.setMap(null));
   markers = [];
   self.restaurants = restaurants;
-}
+};
 
-/**
- * Create all restaurants HTML and add them to the webpage.
- */
-updateRestaurantsUI = (restaurants = self.restaurants) => {
+
+ // Create all restaurants HTML and add them to the webpage.
+
+const updateRestaurantsUI = (restaurants = self.restaurants) => {
   // const ul = document.getElementById('restaurants-list');
   restaurants.forEach(restaurant => {
-    restaurantsList.append(createRestaurantContainerUI(restaurant));
+    elementRestaurantsList.append(createRestaurantContainerUI(restaurant));
   });
   addMarkersToMap();
-}
+};
 
-/**
- * Create restaurant container in the li element
- */
-addRestaurantContainerUI = (restaurant) => {
+
+ // Create restaurant container in the li element
+
+const createRestaurantContainerUI = (restaurant) => {
   // console.log("hit")
   const li = document.createElement('li');
   li.className = 'restaurant-container';
 
+  li.appendChild(createResponsivePicture(restaurant));
+
+
+
+
+ // ---------------------- Look at make image clickable Later -----------------
+
+
+
+
   // Create image
   // Make image clickable for easier user experience
-  const href = document.createElement('a')
-  href.href = DBHelper.urlForRestaurant(restaurant)
-  const image = document.createElement('img');
-  image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  // const href = document.createElement('a')
+  // href.href = DBHelper.urlForRestaurant(restaurant)
+  // const image = document.createElement('img');
+  // image.className = 'restaurant-img';
+  // image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  //
+  // // set alternative text here for better scalability
+  // image.setAttribute('alt', restaurant.alt_text);
+  // href.appendChild(image);
+  // li.appendChild(href);
+  // // console.log(href)
 
-  // set alternative text here for better scalability
-  image.setAttribute('alt', restaurant.alt_text);
-  href.appendChild(image);
-  li.appendChild(href);
-  // console.log(href)
+  // ------------------------------- End href image --------------------------
+
+
+
+
 
   // Create divs for easier restaurant info styling
 
@@ -192,7 +200,48 @@ addRestaurantContainerUI = (restaurant) => {
   li.appendChild(containerActions);
 
   return li;
-}
+};
+
+// Begin Responsive Images
+const createResponsivePicture = (restaurant) => {
+  const picture = document.createElement('picture');
+  const sizes = '(min-width: 80rem) 22.5vw, (min-width: 60rem) 30vw, (min-width: 37.5rem) 45vw, 100vw';
+
+  const srcsetWebP = `${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 300)} 300w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 433)} 433w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 552)} 552w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 653)} 653w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 752)} 752w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 800)} 800w`;
+
+  const srcsetJPEG = `${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 300)} 300w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 433)} 433w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 552)} 552w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 653)} 653w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 752)} 752w,
+                      ${DBHelper.getImageUrlForRestaurant(restaurant, 'webp', 800)} 800w`;
+
+  const sourceWebP = document.createElement('source');
+  sourceWebP.srcset = srcsetWebP;
+  sourceWebP.sizes = sizes;
+  sourceDefault.sizes = sizes;
+  sourceDefault.type = 'image/jpeg';
+  picture.appendChild(sourceDefault);
+
+  const defaultImg = document.createElement('img');
+  const imageSrc = DBHelper.getImageUrlForRestaurant(restaurant, 'jpeg', 800);
+  defaultImg.src = imageSrc;
+
+  let altText = DBHelper.getAlternativeText(restaurant.id);
+  if(!altText) {
+    altText = `Restaurant ${restaurant.name}`;
+  }
+  defaultImg.alt = altText;
+  picture.appendChild(defaultImg);
+
+  return picture;
+};
+
 
 // Initialize Google Maps, called from HTML
 // https://developers.google.com/maps/documentation/javascript/tutorial
