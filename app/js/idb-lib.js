@@ -15,6 +15,7 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 */
 
+
 'use strict';
 
 (function() {
@@ -58,6 +59,9 @@ PERFORMANCE OF THIS SOFTWARE.
       Object.defineProperty(ProxyClass.prototype, prop, {
         get: function() {
           return this[targetProp][prop];
+        },
+        set: function(val) {
+          this[targetProp][prop] = val;
         }
       });
     });
@@ -173,6 +177,7 @@ PERFORMANCE OF THIS SOFTWARE.
     'clear',
     'get',
     'getAll',
+    'getKey',
     'getAllKeys',
     'count'
   ]);
@@ -193,6 +198,9 @@ PERFORMANCE OF THIS SOFTWARE.
         resolve();
       };
       idbTransaction.onerror = function() {
+        reject(idbTransaction.error);
+      };
+      idbTransaction.onabort = function() {
         reject(idbTransaction.error);
       };
     });
@@ -254,10 +262,14 @@ PERFORMANCE OF THIS SOFTWARE.
   // TODO: remove this once browsers do the right thing with promises
   ['openCursor', 'openKeyCursor'].forEach(function(funcName) {
     [ObjectStore, Index].forEach(function(Constructor) {
+      // Don't create iterateKeyCursor if openKeyCursor doesn't exist.
+      if (!(funcName in Constructor.prototype)) return;
+
       Constructor.prototype[funcName.replace('open', 'iterate')] = function() {
         var args = toArray(arguments);
         var callback = args[args.length - 1];
-        var request = (this._store || this._index)[funcName].apply(this._store, args.slice(0, -1));
+        var nativeObject = this._store || this._index;
+        var request = nativeObject[funcName].apply(nativeObject, args.slice(0, -1));
         request.onsuccess = function() {
           callback(request.result);
         };
@@ -312,8 +324,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
   if (typeof module !== 'undefined') {
     module.exports = exp;
-  }
-  else {
+    module.exports.default = module.exports;
+  } else {
     self.idb = exp;
   }
 }());
