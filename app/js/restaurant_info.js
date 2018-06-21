@@ -20,19 +20,39 @@ const elementReviewsList = document.getElementById('reviews-list');
  * https://developers.google.com/maps/documentation/javascript/tutorial
  */
 window.initMap = () => {
+  //Fetch restaurant by using url parameter on currrent page
   const id = getParameterByName('id');
-  DBHelper.fetchRestaurantByID('id')
-  .then(restaurant => {
-    self.restaurant = restaurant;
-    updateRestaurantUI();
+  loadRestaurantNetworkFirst(id);
+}
+
+// Fetch restaurant by id from network, fallback to idb
+const loadRestaurantNetworkFirst = id => {
+  const endpointRestaurantById = `http://localhost:1337/restaurants/${id}`;
+  DBHelper.getServerData(endpointRestaurantById)
+  .then(data => {
+    self.restaurant = data;
+    updateRestaurantUI;
     createBreadcrumb();
-    return restaurant;
-  })
-  .then(restaurant => {
+    saveRestaurantsDataLocally(data)
+    .then(() => {
+      DBHelper.setLastUpdated(new Date());
+      console.warn(err);
+    });
     createGoogleMaps();
   })
-  .catch(DBHelper.logError);
-};
+  .catch(err => {
+    console.log(`[DEBUG] Network req failed...application is offline`);
+    getLocalRestaurantByIdData(id)
+    .then(offlineData => {
+      self.restaurant = offlineData;
+      updateRestaurantUI();
+      createBreadcrumb();
+      createGoogleMaps();
+    }).catch(err => {
+      console.warn(err);
+    });
+  });
+}
 
 /**
  * Create Google Maps
@@ -54,22 +74,22 @@ const createGoogleMaps = () => {
 };
 
 /**
- * Create restaurant HTML and add it to the webpage
+ * Create restaurant details and update operating hours/review
  */
-const updateRestaurantUI = (restaurant = self.restaurant) => {
-  const picture = createResponsivePicture(restaurant);
+const updateRestaurantUI = () => {
+  const picture = createResponsivePicture(self.restaurant);
   const parentElement = elementContainerPrimary.parentNode;
   parentElement.insertBefore(picture, elementContainerPrimary);
 
   // Restaurant name innerHTML and tabIndex
-  elementRestaurantName.innerHTML = restaurant.name;
+  elementRestaurantName.innerHTML = self.restaurant.name;
   elementRestaurantName.tabIndex = '0';
 
   // Restaurant address inter html
-  elementRestaurantAddress.innerHTML = restaurant.address;
+  elementRestaurantAddress.innerHTML = self.restaurant.address;
 
   // Restaurant cuisine inner html
-  elementRestaurantCuisine.innerHTML = restaurant.cuisine_type;
+  elementRestaurantCuisine.innerHTML = self.restaurant.cuisine_type;
 
   if(restaurant.operating_hours) {
     updateRestaurantHoursUI();
@@ -81,7 +101,8 @@ const updateRestaurantUI = (restaurant = self.restaurant) => {
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
  */
-const updateRestaurantHoursUI = (operatingHours = self.restaurant.operating_hours) => {
+const updateRestaurantHoursUI = () => {
+  let operatingHours = self.restaurant.operating_hours;
   for (let key in operatingHours) {
     const row = document.createElement('tr');
     // give row className for quicker styling

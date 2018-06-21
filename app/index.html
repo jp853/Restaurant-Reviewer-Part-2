@@ -24,7 +24,12 @@
     <!-- End header -->
 
     <!-- Beginning main -->
-    <main id="maincontent" role="main">
+    <main id="maincontent" class="main" role="main">
+      <!-- info warnings to be displayed dynamically -->
+      <p id="offline" class="message warn">No network connection, viewing stored data.</p>
+      <p id="no-data" class="message error">No network connection, local data unavailable.</p>
+      <p id="data-saved" class="message success">Data saved for offline viewing.</p>
+      <p id="save-error" class="message error">Server data was not saved.</p>
       <!-- Beginning google map section -->
       <section id="map-container">
         <div id="map" class="maps" role="application" aria-label="Google Maps view of restaurants in New York City" aria-hidden="true"></div>
@@ -35,10 +40,10 @@
       <section>
         <div class="filter-options">
           <!-- <h2>Filter Results</h2> --> <!-- Filter results is redundant and unnecessary -->
-          <select autofocus id="neighborhoods-select" name="neighborhoods" onchange="refreshRestaurants()" aria-label="Select Neighborhood">
+          <select autofocus id="neighborhoods-select" name="neighborhoods" onchange="refreshRestaurantsNetworkFirst()" aria-label="Select Neighborhood">
             <option value="all">All Neighborhoods</option>
           </select>
-          <select autofocus id="cuisines-select" name="cuisines" onchange="refreshRestaurants()" aria-label="Select Cuisine">
+          <select autofocus id="cuisines-select" name="cuisines" onchange="refreshRestaurantsNetworkFirst()" aria-label="Select Cuisine">
             <option value="all">All Cuisines</option>
           </select>
         </div>
@@ -73,6 +78,7 @@
   <!-- <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script> -->
 <!--  Main Javascript File -->
   <!-- <script type="application/javascript" charset="utf-8" src="js/app.js"></script> -->
+  <script src="js/idb-bundle.min.js"></script>
   <script src="js/main-bundle.min.js"></script>
 
   </script>

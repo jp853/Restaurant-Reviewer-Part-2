@@ -37,7 +37,12 @@
     <!-- End header -->
 
     <!-- Beginning main -->
-    <main id="maincontent" role="main">
+    <main id="maincontent" role="main" class="main">
+      <!-- info warnings to be displayed dynamically -->
+      <p id="offline" class="message warn">No network connection, viewing stored data.</p>
+      <p id="no-data" class="message error">No network connection, local data unavailable.</p>
+      <p id="data-saved" class="message success">Data saved for offline viewing.</p>
+      <p id="save-error" class="message error">Server data was not saved.</p>
 
       <!-- restaurant info -->
       <div class="restaurant-info">
@@ -93,6 +98,7 @@
   <!-- <script type="text/javascript" src="js/dbhelper.js"></script> -->
   <!-- Main javascript file -->
   <!-- <script type="text/javascript" src="js/restaurant_info.js"></script> -->
+  <script type="text/javascript" src="js/idb-bundle.min.js"></script>
   <script type="text/javascript" src="js/resto-bundle.min.js"></script>
 
   </script>

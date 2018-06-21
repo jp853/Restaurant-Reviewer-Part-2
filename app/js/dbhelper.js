@@ -145,7 +145,7 @@ class DBHelper {
   /**
    * Restaurant image URL.
    */
-  static imageUrlForRestaurant(restaurant, imageType, width) {
+  static getRestaurantURL(restaurant, imageType, width) {
     let file = 'jpg';
     switch (imageType) {
       case 'jpeg':
